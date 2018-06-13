@@ -1,0 +1,9 @@
+clc;
+bags_feature=feature(ismember(string(labels),'bags'),:);
+dresses_feature=feature(ismember(string(labels),'dresses'),:);
+footwear_feature=feature(ismember(string(labels),'footwear'),:);
+pants_feature=feature(ismember(string(labels),'pants'),:);
+skirts_feature=feature(ismember(string(labels),'skirts'),:);
+suites_feature=feature(ismember(string(labels),'suites'),:);
+tops_feature=feature(ismember(string(labels),'tops'),:);
+outerwear_feature=feature(ismember(string(labels),'outerwear'),:);
