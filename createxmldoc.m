@@ -1,4 +1,5 @@
-function xml = createxmldocwheretobuy(filename1,classname1,width1,height1,depth1,xmin,ymin,xmax,ymax)
+function xml = createxmldoc(myarray,filename1,classname1,width1,height1,depth1)
+
 clc;
 
 %% annotation
@@ -76,49 +77,49 @@ annotation.appendChild(segmented);
 
 %% objects
 %=size(myarray);
+for i =1:size(myarray,1)
+    object=docNode.createElement('object');
 
-object=docNode.createElement('object');
+    classname=docNode.createElement('name');
+    classname.appendChild(docNode.createTextNode(classname1));
+    
+    pose=docNode.createElement('pose');
+    pose.appendChild(docNode.createTextNode('Unspecified'));
+    
+    truncated=docNode.createElement('truncated');
+    truncated.appendChild(docNode.createTextNode('0'));
+    
+    difficult=docNode.createElement('difficult');
+    difficult.appendChild(docNode.createTextNode('0'));
+    
+    bndbox=docNode.createElement('bndbox');
+    
+        xmin=docNode.createElement('xmin');
+        xmin.appendChild(docNode.createTextNode(num2str(myarray(i,1))));
 
-classname=docNode.createElement('name');
-classname.appendChild(docNode.createTextNode(classname1));
+        ymin=docNode.createElement('ymin');
+        ymin.appendChild(docNode.createTextNode(num2str(myarray(i,2))));
 
-pose=docNode.createElement('pose');
-pose.appendChild(docNode.createTextNode('Unspecified'));
+        xmax=docNode.createElement('xmax');
+        xmax.appendChild(docNode.createTextNode(num2str(myarray(i,1)+myarray(i,3))));
 
-truncated=docNode.createElement('truncated');
-truncated.appendChild(docNode.createTextNode('0'));
-
-difficult=docNode.createElement('difficult');
-difficult.appendChild(docNode.createTextNode('0'));
-
-bndbox=docNode.createElement('bndbox');
-
-    xmin=docNode.createElement('xmin');
-    xmin.appendChild(docNode.createTextNode(num2str(xmin)));
-
-    ymin=docNode.createElement('ymin');
-    ymin.appendChild(docNode.createTextNode(num2str(ymin)));
-
-    xmax=docNode.createElement('xmax');
-    xmax.appendChild(docNode.createTextNode(num2str(xmax)));
-
-    ymax=docNode.createElement('ymax');
-    ymax.appendChild(docNode.createTextNode(num2str(ymax)));
-
-bndbox.appendChild(xmin);
-bndbox.appendChild(ymin);
-bndbox.appendChild(xmax);
-bndbox.appendChild(ymax);
-
-
-object.appendChild(classname);
-object.appendChild(pose);
-object.appendChild(truncated);
-object.appendChild(difficult);
-object.appendChild(bndbox);
-
-annotation.appendChild(object);
-
+        ymax=docNode.createElement('ymax');
+        ymax.appendChild(docNode.createTextNode(num2str(myarray(i,2)+myarray(i,4))));
+        
+    bndbox.appendChild(xmin);
+    bndbox.appendChild(ymin);
+    bndbox.appendChild(xmax);
+    bndbox.appendChild(ymax);
+    
+    
+    object.appendChild(classname);
+    object.appendChild(pose);
+    object.appendChild(truncated);
+    object.appendChild(difficult);
+    object.appendChild(bndbox);
+    
+    annotation.appendChild(object);
+end
 
 %% write xml doc
 
