@@ -8,9 +8,9 @@ clc;
 %x=tsne_outerwear;
 x=Y;
 rows = size(x,1);
-S = 32000;
-files=skirtslistwomen;
-imagename='skirts_women_32000.jpg';
+S = 15000;
+files=womenfaketopslist;
+imagename='women_fake_tops_30000.jpg';
 
 
 x = bsxfun(@minus, x, min(x));
@@ -29,7 +29,7 @@ newxy=ones(rows,2);
 
 % size of full embedding image
 G = zeros(S, S, 3, 'uint8');
-s = 119; % size of every single image
+s = 99; % size of every single image
 
 for i=1:rows
     
