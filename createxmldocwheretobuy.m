@@ -1,4 +1,4 @@
-function xml = createxmldocwheretobuy(filename1,classname1,width1,height1,depth1,xmin,ymin,xmax,ymax)
+function [ ] = createxmldocwheretobuy(xmlfile1,filename1,classname1,width1,height1,depth1,xmin1,ymin1,xmax1,ymax1)
 clc;
 
 %% annotation
@@ -12,7 +12,7 @@ annotation.appendChild(folder);
 
 %% filename
 filename=docNode.createElement('filename');
-filename.appendChild(docNode.createTextNode(strcat(filename1,'.jpg')));
+filename.appendChild(docNode.createTextNode(strcat(num2str(filename1),'.jpg')));
 annotation.appendChild(filename);
 
 %% source
@@ -94,16 +94,16 @@ difficult.appendChild(docNode.createTextNode('0'));
 bndbox=docNode.createElement('bndbox');
 
     xmin=docNode.createElement('xmin');
-    xmin.appendChild(docNode.createTextNode(num2str(xmin)));
+    xmin.appendChild(docNode.createTextNode(num2str(xmin1)));
 
     ymin=docNode.createElement('ymin');
-    ymin.appendChild(docNode.createTextNode(num2str(ymin)));
+    ymin.appendChild(docNode.createTextNode(num2str(ymin1)));
 
     xmax=docNode.createElement('xmax');
-    xmax.appendChild(docNode.createTextNode(num2str(xmax)));
+    xmax.appendChild(docNode.createTextNode(num2str(xmax1)));
 
     ymax=docNode.createElement('ymax');
-    ymax.appendChild(docNode.createTextNode(num2str(ymax)));
+    ymax.appendChild(docNode.createTextNode(num2str(ymax1)));
 
 bndbox.appendChild(xmin);
 bndbox.appendChild(ymin);
@@ -122,8 +122,8 @@ annotation.appendChild(object);
 
 %% write xml doc
 
-xmlfilename=strcat(filename1,'.xml');
-xmlwrite(xmlfilename,docNode);
+%xmlfilename=strcat(xmlfile1,'.xml');
+xmlwrite(xmlfile1,docNode);
 %type(xmlfilename);
 
 end
